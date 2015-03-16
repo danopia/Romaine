@@ -6,7 +6,7 @@
  */
 chrome.app.runtime.onLaunched.addListener(function (launchData) {
   chrome.app.window.create(
-    'create-chroot.html',
+    'index.html',
     {
       id: 'mainWindow',
       frame: 'none',

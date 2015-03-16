@@ -31,18 +31,19 @@ core-toolbar paper-icon-button, core-toolbar paper-tabs {
   -webkit-app-region: no-drag;
 }
 
-paper-button {
-  margin: 0.5em 1em 0.5em 0;
-  width: 10em;
+#build-chroot {
+   background-color: #cec;
+   color: #363;
+   font-size: 200%;
+   margin: 2em 5em;
 }
-
-paper-button[right] {
-  position: fixed;
-  right: 0;
+#build-chroot core-icon {
+  width: 32px;
+  height: 32px;
 }
 
 paper-checkbox {
-  margin-left: 1em;
+  margin-right: 1em;
 }
 
 paper-fab {

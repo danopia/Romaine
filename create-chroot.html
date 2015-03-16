@@ -58,12 +58,19 @@
           <dynamic-list id="targets" multi="true"></dynamic-list>
         </section>
 
-        <section key="settings">
+        <section key="settings" vertical layout>
           <h3>Extra settings for the chroot setup</h3>
+          <div><paper-checkbox id="encrypt" label="Encrypt chroot" style="margin: 1em; height: 40px;"></paper-checkbox></div>
         </section>
 
-        <section key="review">
-
+        <section key="review" vertical center layout>
+          <h3>Ready to go!</h3>
+          <div>
+            <paper-button id="build-chroot" tabindex="0">
+              build chroot &nbsp;
+              <core-icon icon="input"></core-icon>
+            </paper-button>
+          </div>
         </section>
       </core-animated-pages>
     </div>
