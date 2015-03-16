@@ -1,0 +1,12 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="chroot-list">
+  <template>
+    <core-selector>
+      <template repeat="{{chroot in chroots}}">
+        <paper-item>{{chroot}}</paper-item>
+      </template>
+    </core-selector>
+  </template>
+  <script src="chroot-list.js"></script>
+</polymer-element>

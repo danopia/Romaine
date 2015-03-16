@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+  <title>Romaine</title>
+
+  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+
+  <link rel="import" href="bower_components/core-icons/core-icons.html">
+  <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+  <link rel="import" href="bower_components/core-selector/core-selector.html">
+  <link rel="import" href="bower_components/font-roboto/roboto.html">
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+  <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+  <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="bower_components/paper-toast/paper-toast.html">
+  <link rel="import" href="bower_components/paper-item/paper-item.html">
+
+  <link rel="import" href="elements/chroot-list.html">
+
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body unresolved>
+  <core-toolbar class="draggable">
+    <paper-icon-button icon="menu"></paper-icon-button>
+    <span flex>Romaine</span>
+    <paper-icon-button icon="close"></paper-icon-button>
+    <paper-fab icon="add"></paper-fab>
+  </core-toolbar>
+
+  <div horizontal layout>
+
+    <chroot-list flex>
+    </chroot-list>
+
+    <div flex three>
+      <section id="new-chroot">
+        <h2>Create New Chroot</h2>
+        <paper-checkbox label="Got it!"></paper-checkbox>
+      </section>
+
+      <section>
+        <paper-tabs selected="0">
+          <paper-tab>Tab one</paper-tab>
+          <paper-tab>Tab two</paper-tab>
+          <paper-tab>Tab three</paper-tab>
+        </paper-tabs>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </section>
+
+      <paper-toast id="connected-toast" text="Connected to Romaine server"></paper-toast>
+    </div>
+
+  </div>
+
+  <script src="common.js"></script>
+  <script src="index.js"></script>
+</body>

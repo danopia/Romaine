@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Romaine</title>
+
+  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+
+  <link rel="import" href="bower_components/core-icons/core-icons.html">
+  <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+  <link rel="import" href="bower_components/core-selector/core-selector.html">
+  <link rel="import" href="bower_components/font-roboto/roboto.html">
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+  <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+  <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="bower_components/paper-toast/paper-toast.html">
+  <link rel="import" href="bower_components/paper-item/paper-item.html">
+  <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+  <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
+  <link rel="import" href="bower_components/core-animated-pages/transitions/slide-from-right.html">
+  <link rel="import" href="bower_components/core-collapse/core-collapse.html">
+
+  <link rel="import" href="elements/dynamic-list.html">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body fullbleed layout vertical unresolved>
+  <core-header-panel mode="waterfall" flex>
+    <core-toolbar class="draggable core-header animate medium-tall">
+      <span flex>Build New Chroot</span>
+      <paper-icon-button icon="close"></paper-icon-button>
+
+      <paper-tabs selected="distro" valueattr="key" class="middle fit">
+        <paper-tab key="distro">Distribution</paper-tab>
+        <paper-tab key="release">Release</paper-tab>
+        <paper-tab key="targets">Targets</paper-tab>
+        <paper-tab key="settings">Settings</paper-tab>
+        <paper-tab key="review">Review</paper-tab>
+      </paper-tabs>
+    </core-toolbar>
+
+    <div class="content">
+      <core-animated-pages selected="distro" valueattr="key" transitions="slide-from-right" flex>
+        <section key="distro">
+          <h3>Select a Linux distribution to use</h3>
+          <dynamic-list id="distros"></dynamic-list>
+        </section>
+
+        <section key="release">
+          <h3>Choose a distro version</h3>
+          <dynamic-list id="releases"></dynamic-list>
+        </section>
+
+        <section key="targets">
+          <h3>Select components to install in the chroot</h3>
+          <dynamic-list id="targets" multi="true"></dynamic-list>
+        </section>
+
+        <section key="settings">
+          <h3>Extra settings for the chroot setup</h3>
+        </section>
+
+        <section key="review">
+
+        </section>
+      </core-animated-pages>
+    </div>
+  </core-header-panel>
+
+  <core-collapse id="step-bar">
+    <core-toolbar>
+      <span flex></span>
+      <paper-button id="next-step" tabindex="0">
+        next step &nbsp;
+        <core-icon icon="arrow-forward"></core-icon>
+      </paper-button>
+    </core-toolbar>
+  </core-collapse>
+
+  <script src="common.js"></script>
+  <script src="create-chroot.js"></script>
+</body>

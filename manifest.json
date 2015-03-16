@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Romaine",
+  "short_name": "Romaine",
+  "description": "",
+  "version": "0.0.3",
+  "minimum_chrome_version": "38",
+
+  "icons": {
+    "16": "assets/Romaine_16.png",
+    "128": "assets/Romaine_128.png"
+  },
+
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  }
+}
