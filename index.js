@@ -8,7 +8,7 @@ document.querySelector('paper-fab').onclick = function () {
     {
       id: 'createChroot',
       frame: 'none',
-      bounds: {width: 400, height: 600}
+      bounds: {width: 700, height: 600}
     }
   );
 };

@@ -10,7 +10,7 @@ chrome.app.runtime.onLaunched.addListener(function (launchData) {
     {
       id: 'mainWindow',
       frame: 'none',
-      bounds: {width: 800, height: 600}
+      bounds: {width: 850, height: 500}
     }
   );
 });
