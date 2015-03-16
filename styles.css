@@ -43,7 +43,8 @@ core-toolbar paper-icon-button, core-toolbar paper-tabs {
 }
 
 paper-checkbox {
-  margin-right: 1em;
+  padding: 2em;
+  padding-left: 4em;
 }
 
 paper-fab {
@@ -61,4 +62,14 @@ paper-tabs {
 
 paper-tabs[noink][nobar] paper-tab.core-selected {
   color: #ffff8d;
+}
+
+pre.shell {
+  background-color: #222;
+  color: #ccc;
+  -webkit-user-select: initial;
+}
+pre.shell:before {
+  content: '$ ';
+  color: #666;
 }

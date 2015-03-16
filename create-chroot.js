@@ -5,11 +5,14 @@ document.querySelector('[icon=close]').onclick = function () {
 
 // Set up tabs and navigation
 var steps = ['distro', 'release', 'targets', 'settings', 'review'];
+var wizard = document.querySelector('#wizard');
 var tabs = document.querySelector('paper-tabs');
 var pages = document.querySelector('core-animated-pages');
 tabs.addEventListener('core-activate', function () {
   pages.selected = tabs.selected;
   handleStepBar(tabs.selected);
+
+  output.opened = false;
 });
 
 document.querySelector('#next-step').addEventListener('click', function () {
@@ -45,6 +48,7 @@ function switchTab (key) {
 var stepBar = document.querySelector('#step-bar');
 function handleStepBar (tab) {
   stepBar.opened = tab == 'targets' || tab == 'settings';
+  buildCommand();
 }
 
 // Handle selecting a distro
@@ -62,4 +66,50 @@ document.querySelector('#releases').onselect = function () {
 var targets = document.querySelector('#targets');
 listTargets(function (obj) {
   targets.items = obj;
+});
+
+// Build the crouton command to run
+var shell = document.querySelector('#shell');
+var cmdLine = document.querySelector('#cmd-line');
+function buildCommand () {
+  var args = [];
+
+  if (releases.selected) {
+    args.push('-r');
+    args.push(releases.selected);
+  }
+
+  if (targets.selected) {
+    args.push('-t');
+    args.push(targets.selected.join(','));
+  }
+
+  if (document.querySelector('#encrypt').checked) {
+    args.push('-e');
+  }
+
+  if (document.querySelector('#update').checked) {
+    args.push('-u');
+  }
+
+  cmdLine.innerText = args.join(' ');
+  shell.opened = true;
+}
+
+targets.onselect = buildCommand;
+
+// Run crouton
+var buildButton = document.querySelector('#build-chroot');
+var output = document.querySelector('#output');
+buildButton.addEventListener('click', function () {
+  pages.selected = 'building';
+  buildCommand();
+
+  setTimeout(function () {
+    output.opened = true;
+  }, 750);
+
+  chrome.runtime.sendMessage({cmd: 'run crouton', args: cmdLine.innerText.split(' ')}, function (response) {
+    document.querySelector('#output pre').innerText = response.output;
+  });
 });

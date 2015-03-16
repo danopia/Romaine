@@ -20,6 +20,7 @@
   <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
   <link rel="import" href="bower_components/core-animated-pages/transitions/slide-from-right.html">
   <link rel="import" href="bower_components/core-collapse/core-collapse.html">
+  <link rel="import" href="bower_components/paper-progress/paper-progress.html">
 
   <link rel="import" href="elements/dynamic-list.html">
 
@@ -27,19 +28,19 @@
 </head>
 
 <body fullbleed layout vertical unresolved>
-  <core-header-panel mode="waterfall" flex>
-    <core-toolbar class="draggable core-header animate medium-tall">
-      <span flex>Build New Chroot</span>
-      <paper-icon-button icon="close"></paper-icon-button>
+  <core-toolbar class="draggable">
+    <span flex>Build New Chroot</span>
+    <paper-icon-button icon="close"></paper-icon-button>
+  </core-toolbar>
 
-      <paper-tabs selected="distro" valueattr="key" class="middle fit">
-        <paper-tab key="distro">Distribution</paper-tab>
-        <paper-tab key="release">Release</paper-tab>
-        <paper-tab key="targets">Targets</paper-tab>
-        <paper-tab key="settings">Settings</paper-tab>
-        <paper-tab key="review">Review</paper-tab>
-      </paper-tabs>
-    </core-toolbar>
+  <core-header-panel mode="waterfall" flex>
+    <paper-tabs class="core-header animate" selected="distro" valueattr="key" class="fit">
+      <paper-tab key="distro">Distribution</paper-tab>
+      <paper-tab key="release">Release</paper-tab>
+      <paper-tab key="targets">Targets</paper-tab>
+      <paper-tab key="settings">Settings</paper-tab>
+      <paper-tab key="review">Review</paper-tab>
+    </paper-tabs>
 
     <div class="content">
       <core-animated-pages selected="distro" valueattr="key" transitions="slide-from-right" flex>
@@ -58,9 +59,24 @@
           <dynamic-list id="targets" multi="true"></dynamic-list>
         </section>
 
-        <section key="settings" vertical layout>
+        <section key="settings">
           <h3>Extra settings for the chroot setup</h3>
-          <div><paper-checkbox id="encrypt" label="Encrypt chroot" style="margin: 1em; height: 40px;"></paper-checkbox></div>
+
+          <core-label horizontal layout>
+            <paper-checkbox for id="encrypt"></paper-checkbox>
+            <div vertical layout>
+              <h2>Encrypt</h2>
+              <div>Require a password to unlock the chroot whenever you want to use it.</div>
+            </div>
+          </core-label>
+
+          <core-label horizontal layout>
+            <paper-checkbox for id="update"></paper-checkbox>
+            <div vertical layout>
+              <h2>Update</h2>
+              <div>Update the existing chroot of this release, if any. Allows for adding targets.</div>
+            </div>
+          </core-label>
         </section>
 
         <section key="review" vertical center layout>
@@ -71,6 +87,11 @@
               <core-icon icon="input"></core-icon>
             </paper-button>
           </div>
+        </section>
+
+        <section key="building" vertical layout>
+          <paper-progress indeterminate style="width: auto; margin: 2em;"></paper-progress>
+          <p self-center>building... this might take a while!</p>
         </section>
       </core-animated-pages>
     </div>
@@ -84,6 +105,16 @@
         <core-icon icon="arrow-forward"></core-icon>
       </paper-button>
     </core-toolbar>
+  </core-collapse>
+
+  <core-collapse id="shell">
+    <core-toolbar style='background-color: #222; color: #ccc;'>
+      <pre flex class="shell">sudo sh ~/Downloads/crouton <span id="cmd-line"></span></pre>
+    </core-toolbar>
+  </core-collapse>
+
+  <core-collapse id="output" style="background-color: #333; color: #ccc; height: 300px;" fixedSize>
+    <pre id="actual-output" style="margin: 1em 2em;">...</pre>
   </core-collapse>
 
   <script src="common.js"></script>
