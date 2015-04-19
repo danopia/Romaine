@@ -27,7 +27,7 @@ var Contexts = {};
 
 Socket.onopen = function () {
   chrome.runtime.sendMessage({event: 'connected'});
-}
+};
 
 Socket.onmessage = function (msg) {
   var data = JSON.parse(msg.data);
@@ -41,7 +41,7 @@ Socket.onmessage = function (msg) {
   } else {
     console.warn('got server message without context!');
   }
-}
+};
 
 chrome.runtime.onMessage.addListener(function (message, sender, reply) {
   if (!message.cmd)

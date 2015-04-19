@@ -13,7 +13,7 @@ function listDistros (callback) {
     debian: 'In case you dislike Ubuntu',
     kali:   'Information Security / pen testing distro',
     ubuntu: 'General-purpose distro with the widest package coverage',
-  }
+  };
 
   chrome.runtime.sendMessage({cmd: 'run crouton', args: ['-r', 'list']}, function (response) {
     callback(response.output.match(distroRegex).map(function (raw) {
