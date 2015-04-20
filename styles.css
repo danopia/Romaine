@@ -31,17 +31,6 @@ core-toolbar paper-icon-button, core-toolbar paper-tabs {
   -webkit-app-region: no-drag;
 }
 
-#build-chroot {
-   background-color: #cec;
-   color: #363;
-   font-size: 200%;
-   margin: 2em 5em;
-}
-#build-chroot core-icon {
-  width: 32px;
-  height: 32px;
-}
-
 paper-checkbox {
   padding: 2em;
   padding-left: 4em;
@@ -62,14 +51,4 @@ paper-tabs {
 
 paper-tabs[noink][nobar] paper-tab.core-selected {
   color: #ffff8d;
-}
-
-pre.shell {
-  background-color: #222;
-  color: #ccc;
-  -webkit-user-select: initial;
-}
-pre.shell:before {
-  content: '$ ';
-  color: #666;
 }
