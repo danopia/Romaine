@@ -22,38 +22,53 @@ function guidGenerator() {
   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
 
-var Socket = new WebSocket("ws://localhost:6205/ws");
+var Sockets = {};
 var Contexts = {};
 
-Socket.onopen = function () {
-  chrome.runtime.sendMessage({event: 'connected'});
-};
-
-Socket.onmessage = function (msg) {
-  var data = JSON.parse(msg.data);
-  console.log('got', data);
-
-  if (data.context) {
-    console.log('forwarding server message to original caller');
-    Contexts[data.context](data);
-    delete Contexts[data.context];
-
-  } else {
-    console.warn('got server message without context!');
-  }
-};
+function connectSocket (port, initial) {
+  var socket = new WebSocket("ws://localhost:" + port + "/ws");
+  Sockets[port] = socket;
+  
+  socket.onopen = function () {
+    chrome.runtime.sendMessage({event: 'connected', port: port});
+    
+    if (initial) {
+      socket.send(JSON.stringify(initial));
+    }
+  };
+  
+  socket.onmessage = function (msg) {
+    var data = JSON.parse(msg.data);
+    console.log('port', port, 'got', data);
+  
+    if (data.context) {
+      console.log('forwarding server message to original caller');
+      Contexts[data.context](data);
+      delete Contexts[data.context];
+  
+    } else {
+      console.warn('got server message from', port, 'without context!');
+    }
+  };
+}
 
 chrome.runtime.onMessage.addListener(function (message, sender, reply) {
   if (!message.cmd)
     return false; // ignore the message
 
-  console.log('got message', message, 'from', sender);
+  console.log('got message', message, 'from', sender, 'to', message.port);
 
   message.context = guidGenerator();
   Contexts[message.context] = reply;
 
-  Socket.send(JSON.stringify(message));
-
+  // connect to server if needed
+  message.port = message.port || 6205;
+  if (Sockets[message.port]) {
+    Sockets[message.port].send(JSON.stringify(message));
+  } else {
+    connectSocket(message.port, message);
+  }
+  
   return true; // will respond async
 });
 
