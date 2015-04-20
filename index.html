@@ -16,10 +16,10 @@
   <link rel="import" href="bower_components/paper-toast/paper-toast.html">
   <link rel="import" href="bower_components/paper-item/paper-item.html">
 
-  <link rel="import" href="elements/chroot-list.html">
+  <link rel="import" href="elements/chroot-info.html">
+  <link rel="import" href="elements/dynamic-list.html">
 
   <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body unresolved>
@@ -31,17 +31,11 @@
   </core-toolbar>
 
   <div horizontal layout>
-
-    <chroot-list flex>
-    </chroot-list>
-
-    <div flex three>
-
-
-      <paper-toast id="connected-toast" text="Connected to Romaine server"></paper-toast>
-    </div>
-
+    <dynamic-list flex showChecks="false"></dynamic-list>
+    <chroot-info flex three></chroot-info>
   </div>
+
+  <paper-toast id="connected-toast" text="Connected to Romaine server"></paper-toast>
 
   <script src="common.js"></script>
   <script src="index.js"></script>

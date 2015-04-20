@@ -1,18 +1,27 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="dynamic-list" attributes="multi items selected">
+<polymer-element name="dynamic-list" attributes="multi items selected showChecks">
   <template>
-    <core-selector valueattr="key" selected="{{selected}}" on-core-activate="{{onselect}}" multi="{{multi}}">
+    <core-selector valueattr="key" multi="{{multi}}"
+                   selected="{{selected}}" on-core-activate="{{onselect}}">
       <template repeat="{{item in items}}">
+        
         <paper-item key="{{item.key}}" active="{{item.active}}">
-          <core-icon icon="{{item.active ? 'check-box' : 'check-box-outline-blank'}}"></core-icon>
-          <span flex style="padding-left: 10px;">{{item.label}}</span>
+          <template if="{{showChecks}}">
+            <core-icon icon="check-box{{item.active ? '' : '-outline-blank'}}"
+                       style="padding-left: 10px;"></core-icon>
+          </template>
+          
+          <span flex>{{item.label}}</span>
+          
           <template if="{{item.description}}">
-             <span style="font-size: 80%; color: #444;">{{item.description}}</span>
+            <span style="font-size: 80%; color: #444;">{{item.description}}</span>
           </template>
         </paper-item>
+        
       </template>
     </core-selector>
   </template>
+  
   <script src="dynamic-list.js"></script>
 </polymer-element>

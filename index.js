@@ -14,5 +14,16 @@ document.querySelector('paper-fab').onclick = function () {
 };
 
 chrome.runtime.sendMessage({cmd: 'list chroots'}, function (response) {
-  document.querySelector('chroot-list').chroots = response.chroots;
+  document.querySelector('dynamic-list').items = response.chroots.map(function (chroot) {
+    return {
+      key: chroot,
+      label: chroot,
+    };
+  });
 });
+
+document.querySelector('dynamic-list').onselect = function (e, item, selector) {
+  document.querySelector('chroot-info').chroot = {
+    key: selector.selected,
+  };
+};
