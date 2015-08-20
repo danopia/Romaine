@@ -5,8 +5,10 @@ Polymer('chroot-info', {
 
     var self = this;
     this.getVersion = function () {
-      chrome.runtime.sendMessage({cmd: 'get info', port: self.chroot.port}, function (response) {
-        self.versions = response.info;
+      //chrome.runtime.sendMessage({cmd: 'get info', chroot: self.chroot.key}, function (response) {
+      chrome.runtime.sendMessage({cmd: 'run in chroot', args: ['uname', '-a'], chroot: self.chroot.key}, function (response) {
+        // self.versions = response.info;
+        self.chroot.port = response.output;
       });
     };
   },

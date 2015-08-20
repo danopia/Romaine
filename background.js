@@ -42,10 +42,14 @@ function connectSocket (port, initial) {
     console.log('port', port, 'got', data);
   
     if (data.context) {
-      console.log('forwarding server message to original caller');
-      Contexts[data.context](data);
-      delete Contexts[data.context];
-  
+      if (!data.pending) {
+        console.log('forwarding server message to original caller');
+        Contexts[data.context](data);
+        delete Contexts[data.context];
+      } else {
+        console.log('ignoring unfinished context');
+      }
+
     } else {
       console.warn('got server message from', port, 'without context!');
     }

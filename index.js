@@ -22,7 +22,7 @@ chrome.runtime.sendMessage({cmd: 'list chroots'}, function (response) {
     return {
       key: chroot.key,
       label: chroot.key,
-      description: chroot.running ? '(running)' : '',
+      description: '(' + chroot.state + ')',
     };
   });
 });
@@ -30,9 +30,13 @@ chrome.runtime.sendMessage({cmd: 'list chroots'}, function (response) {
 document.querySelector('dynamic-list').onselect = function (e, item, selector) {
   if (!selector.selected) return;
   
-  document.querySelector('chroot-info').chroot = chroots[selector.selected];
+  var chroot = chroots[selector.selected];
+  document.querySelector('chroot-info').chroot = chroot;
   
-  chrome.runtime.sendMessage({cmd: 'start chroot', chroot: selector.selected}, function (leaf) {
-    document.querySelector('chroot-info').chroot.port = leaf.port;
-  });
+  if (chroot.state == 'stopped') {
+    chrome.runtime.sendMessage({cmd: 'start chroot', chroot: selector.selected}, function (leaf) {
+      chroot.state = 'running';
+      //document.querySelector('chroot-info').chroot.port = leaf.port;
+    });
+  }
 };
