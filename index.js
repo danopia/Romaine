@@ -31,7 +31,7 @@ document.querySelector('dynamic-list').onselect = function (e, item, selector) {
   if (!selector.selected) return;
   
   var chroot = chroots[selector.selected];
-  document.querySelector('chroot-info').chroot = chroot;
+  document.querySelector('chroot-info').selectChroot(chroot);
   
   if (chroot.state == 'stopped') {
     chrome.runtime.sendMessage({cmd: 'start chroot', chroot: selector.selected}, function (leaf) {
