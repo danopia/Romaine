@@ -26,7 +26,7 @@ var Sockets = {};
 var Contexts = {};
 
 function connectSocket (port, initial) {
-  var socket = new WebSocket("ws://localhost:" + port + "/ws");
+  var socket = new WebSocket("ws://localhost:" + port + "/app");
   Sockets[port] = socket;
   
   socket.onopen = function () {
