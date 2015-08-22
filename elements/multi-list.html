@@ -1,13 +1,13 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<dom-module id="dynamic-list">
+<dom-module id="multi-list">
   <template>
-    <iron-selector id="list" attr-for-selected="key" selected="{{selected}}" on-iron-select="onselect">
+    <iron-selector id="list" attr-for-selected="key" multi selected-values="{{selectedValues}}" on-iron-select="onselect">
       <template is="dom-repeat" items="{{items}}" as="item">
         
         <paper-item key="{{item.key}}">
           <template is="dom-if" if="{{!noIcons}}">
-            <iron-icon icon="{{computeIcon(selected, item.key)}}" style="padding: 0 10px;"></iron-icon>
+            <iron-icon icon="[[computeIcon(selectedValues.*, item.key)]]" style="padding: 0 10px;"></iron-icon>
           </template>
           
           <span flex="">{{item.label}}</span>
@@ -20,5 +20,5 @@
       </template>
     </iron-selector>
   </template>
-  <script src="dynamic-list.js"></script>
+  <script src="multi-list.js"></script>
 </dom-module>

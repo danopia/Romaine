@@ -7,8 +7,8 @@ document.querySelector('[icon=close]').onclick = function () {
 var steps = ['distro', 'release', 'targets', 'settings', 'review'];
 var wizard = document.querySelector('#wizard');
 var tabs = document.querySelector('paper-tabs');
-var pages = document.querySelector('core-animated-pages');
-tabs.addEventListener('core-activate', function () {
+var pages = document.querySelector('neon-animated-pages');
+tabs.addEventListener('iron-select', function () {
   pages.selected = tabs.selected;
   handleStepBar(tabs.selected);
 
@@ -16,7 +16,7 @@ tabs.addEventListener('core-activate', function () {
 });
 
 document.querySelector('#next-step').addEventListener('click', function () {
-  var step = steps[steps.indexOf(tabs.selected) + 1];
+  var step = tabs.selected + 1;
   tabs.selected = step;
   pages.selected = step;
   handleStepBar(step);
@@ -28,7 +28,7 @@ var releases = document.querySelector('#releases');
 var distroMap = {};
 
 listDistros(function (obj) {
-  distros.items = obj;
+  distros.items = obj.reverse();
 
   obj.forEach(function (that) {
     distroMap[that.key] = that;
@@ -47,19 +47,19 @@ function switchTab (key) {
 // Step bar (next step, etc) logic
 var stepBar = document.querySelector('#step-bar');
 function handleStepBar (tab) {
-  stepBar.opened = tab == 'targets' || tab == 'settings';
+  stepBar.opened = (tab == 2) || (tab == 3); // targets, settings
   buildCommand();
 }
 
 // Handle selecting a distro
 document.querySelector('#distros').onselect = function () {
-  switchTab('release');
+  switchTab(1);
   releases.items = (distroMap[distros.selected] || {}).releases;
 };
 
 // Handle selecting a release
 document.querySelector('#releases').onselect = function () {
-  switchTab('targets');
+  switchTab(2);
 };
 
 // Load target list
@@ -79,9 +79,9 @@ function buildCommand () {
     args.push(releases.selected);
   }
 
-  if (targets.selected) {
+  if (targets.selectedValues.length) {
     args.push('-t');
-    args.push(targets.selected.join(','));
+    args.push(targets.selectedValues.join(','));
   }
 
   if (document.querySelector('#encrypt').checked) {
@@ -96,13 +96,18 @@ function buildCommand () {
   shell.opened = true;
 }
 
+// Lodge command builder hooks
 targets.onselect = buildCommand;
+var i, boxes = document.querySelectorAll('paper-checkbox');
+for (i = 0; i < boxes.length; i++) {
+  boxes[i].addEventListener('change', buildCommand);
+}
 
 // Run crouton
 var buildButton = document.querySelector('#build-chroot');
 var output = document.querySelector('#output');
 buildButton.addEventListener('click', function () {
-  pages.selected = 'building';
+  pages.selected = 5; // building
   buildCommand();
 
   setTimeout(function () {

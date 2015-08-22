@@ -2,13 +2,12 @@
   "name": "Romaine",
   "description": "",
   "homepage": "",
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#0.5.5",
-    "paper-elements": "Polymer/paper-elements#0.5.5",
-    "core-animated-pages": "Polymer/core-animated-pages#latest"
+    "polymer": "Polymer/polymer#^1.0.0",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.0",
+    "neon-animation": "PolymerElements/neon-animation#^1.0.6"
   }
 }

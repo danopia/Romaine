@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html><html><head>
   <title>Build New Chroot</title>
 
-  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-  <link rel="import" href="bower_components/core-icons/core-icons.html">
-  <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
-  <link rel="import" href="bower_components/core-selector/core-selector.html">
+  <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="bower_components/iron-selector/iron-selector.html">
   <link rel="import" href="bower_components/font-roboto/roboto.html">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
   <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
@@ -16,26 +14,54 @@
   <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
   <link rel="import" href="bower_components/paper-toast/paper-toast.html">
   <link rel="import" href="bower_components/paper-item/paper-item.html">
-  <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
-  <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
-  <link rel="import" href="bower_components/core-animated-pages/transitions/slide-from-right.html">
-  <link rel="import" href="bower_components/core-collapse/core-collapse.html">
+  <link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
+  <link rel="import" href="bower_components/neon-animation/neon-animated-pages.html">
+  <link rel="import" href="bower_components/neon-animation/neon-animatable.html">
+  <link rel="import" href="bower_components/neon-animation/animations/slide-from-right-animation.html">
+  <link rel="import" href="bower_components/neon-animation/animations/slide-left-animation.html">
+  <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
   <link rel="import" href="bower_components/paper-progress/paper-progress.html">
+  <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
 
   <link rel="import" href="elements/dynamic-list.html">
+  <link rel="import" href="elements/multi-list.html">
 
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="create-chroot.css">
+  <style is="custom-style">
+    /* TODO(polyup): For speed, consider reworking these styles with .classes
+                     and #ids rather than [attributes].
+    */
+    [layout] {
+      @apply(--layout);
+    }
+    [layout][vertical] {
+      @apply(--layout-vertical);
+    }
+    [fullbleed] {
+      margin: 0;
+      height:100vh;
+    }
+    [layout][horizontal] {
+      @apply(--layout-horizontal);
+    }
+    [layout][center] {
+      @apply(--layout-center);
+    }
+    [self-center] {
+      @apply(--layout-self-center);
+    }
+  </style>
 </head>
 
-<body fullbleed layout vertical unresolved>
-  <core-toolbar class="draggable">
+<body fullbleed layout vertical>
+  <paper-toolbar class="draggable">
     <span flex>Build New Chroot</span>
     <paper-icon-button icon="close"></paper-icon-button>
-  </core-toolbar>
+  </paper-toolbar>
 
-  <core-header-panel mode="waterfall" flex>
-    <paper-tabs class="core-header animate" selected="distro" valueattr="key" class="fit">
+  <paper-header-panel mode="waterfall" flex="">
+    <paper-tabs class="core-header animate" selected="0" valueattr="key">
       <paper-tab key="distro">Distribution</paper-tab>
       <paper-tab key="release">Release</paper-tab>
       <paper-tab key="targets">Targets</paper-tab>
@@ -44,80 +70,80 @@
     </paper-tabs>
 
     <div class="content">
-      <core-animated-pages selected="distro" valueattr="key" transitions="slide-from-right" flex>
-        <section key="distro">
+      <neon-animated-pages selected="0" valueattr="key" entry-animation="slide-from-right-animation" exit-animation="slide-left-animation" flex="">
+        <neon-animatable key="distro">
           <h3>Select a Linux distribution to use</h3>
           <dynamic-list id="distros"></dynamic-list>
-        </section>
+        </neon-animatable>
 
-        <section key="release">
+        <neon-animatable key="release">
           <h3>Choose a distro version</h3>
           <dynamic-list id="releases"></dynamic-list>
-        </section>
+        </neon-animatable>
 
-        <section key="targets">
+        <neon-animatable key="targets">
           <h3>Select components to install in the chroot</h3>
-          <dynamic-list id="targets" multi="true"></dynamic-list>
-        </section>
+          <multi-list id="targets"></dynamic-list>
+        </neon-animatable>
 
-        <section key="settings">
+        <neon-animatable key="settings">
           <h3>Extra settings for the chroot setup</h3>
 
-          <core-label horizontal layout>
-            <paper-checkbox for id="encrypt"></paper-checkbox>
-            <div vertical layout>
+          <core-label class="horizontal layout">
+            <paper-checkbox for="" id="encrypt"></paper-checkbox>
+            <div class="vertical layout">
               <h2>Encrypt</h2>
               <div>Require a password to unlock the chroot whenever you want to use it.</div>
             </div>
           </core-label>
 
-          <core-label horizontal layout>
-            <paper-checkbox for id="update"></paper-checkbox>
-            <div vertical layout>
+          <core-label class="horizontal layout">
+            <paper-checkbox for="" id="update"></paper-checkbox>
+            <div class="vertical layout">
               <h2>Update</h2>
               <div>Update the existing chroot of this release, if any. Allows for adding targets.</div>
             </div>
           </core-label>
-        </section>
+        </neon-animatable>
 
-        <section key="review" vertical center layout>
+        <neon-animatable key="review" class="vertical center layout">
           <h3>Ready to go!</h3>
           <div>
             <paper-button id="build-chroot" tabindex="0">
               build chroot &nbsp;
-              <core-icon icon="input"></core-icon>
+              <iron-icon icon="input"></iron-icon>
             </paper-button>
           </div>
-        </section>
+        </neon-animatable>
 
-        <section key="building" vertical layout>
-          <paper-progress indeterminate style="width: auto; margin: 2em;"></paper-progress>
-          <p self-center>building... this might take a while!</p>
-        </section>
-      </core-animated-pages>
+        <neon-animatable key="building" class="vertical layout">
+          <paper-progress indeterminate="" style="width: auto; margin: 2em;"></paper-progress>
+          <p class="self-center">building... this might take a while!</p>
+        </neon-animatable>
+      </neon-animated-pages>
     </div>
-  </core-header-panel>
+  </paper-header-panel>
 
-  <core-collapse id="step-bar">
-    <core-toolbar>
-      <span flex></span>
+  <iron-collapse id="step-bar">
+    <paper-toolbar style="background-color: #cfd8dc; color: #263238;">
+      <span flex=""></span>
       <paper-button id="next-step" tabindex="0">
         next step &nbsp;
-        <core-icon icon="arrow-forward"></core-icon>
+        <iron-icon icon="arrow-forward"></iron-icon>
       </paper-button>
-    </core-toolbar>
-  </core-collapse>
+    </paper-toolbar>
+  </iron-collapse>
 
-  <core-collapse id="shell">
-    <core-toolbar style='background-color: #222; color: #ccc;'>
-      <pre flex class="shell">sudo sh ~/Downloads/crouton <span id="cmd-line"></span></pre>
-    </core-toolbar>
-  </core-collapse>
+  <iron-collapse id="shell">
+    <paper-toolbar style="background-color: #222; color: #ccc;">
+      <pre flex="" class="shell">sudo sh ~/Downloads/crouton <span id="cmd-line"></span></pre>
+    </paper-toolbar>
+  </iron-collapse>
 
-  <core-collapse id="output" style="background-color: #333; color: #ccc; height: 300px;" fixedSize>
+  <iron-collapse id="output" style="background-color: #333; color: #ccc; height: 300px;" fixedsize="">
     <pre id="actual-output" style="margin: 1em 2em;">...</pre>
-  </core-collapse>
+  </iron-collapse>
 
   <script src="common.js"></script>
   <script src="create-chroot.js"></script>
-</body>
+</body></html>

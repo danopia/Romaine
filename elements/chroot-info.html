@@ -1,10 +1,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="chroot-info" attributes="chroot">
+<dom-module id="chroot-info">
   <template>
-    {{chroot.key}} port {{chroot.port}}
+    <span>{{chroot.key}}</span> port <span>{{chroot.port}}</span>
     
-    <paper-button on-click="{{getVersion}}">
+    <paper-button on-click="getVersion">
       Get version info
     </paper-button>
     
@@ -19,6 +19,5 @@
       <dt>freon</dt><dd>{{versions.freon}}</dd>
     </dl>
   </template>
-  
   <script src="chroot-info.js"></script>
-</polymer-element>
+</dom-module>

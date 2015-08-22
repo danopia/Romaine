@@ -18,7 +18,7 @@ a, a:hover {
   text-decoration: none;
 }
 
-core-toolbar.draggable {
+paper-toolbar.draggable {
   -webkit-app-region: drag;
   background-color: #455ede;
   box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
@@ -27,7 +27,7 @@ core-toolbar.draggable {
   font-weight: 400;
 }
 
-core-toolbar paper-icon-button, core-toolbar paper-tabs {
+paper-toolbar paper-icon-button, core-toolbar paper-tabs {
   -webkit-app-region: no-drag;
 }
 
@@ -52,3 +52,12 @@ paper-tabs {
 paper-tabs[noink][nobar] paper-tab.core-selected {
   color: #ffff8d;
 }
+
+[flex] {
+  flex: 1;
+}
+
+iron-selector .iron-selected {
+  background: #eee;
+}
+

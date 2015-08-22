@@ -1,12 +1,12 @@
 Polymer({
-  is: 'dynamic-list',
+  is: 'multi-list',
   properties: {
     items: {
       type: Array,
       value: [{ description: 'loading...' }],
     },
-    selected: {
-      value: null,
+    selectedValues: {
+      value: [],
       notify: true,
     },
     noIcons: {
@@ -15,7 +15,7 @@ Polymer({
     },
   },
   
-  computeIcon: function (selected, key) {
-    return 'radio-button-' + ((selected == key) ? 'checked' : 'unchecked');
+  computeIcon: function (selectedList, key) {
+    return 'check-box' + ((selectedList.base.indexOf(key) >= 0) ? '' : '-outline-blank');
   },
 });

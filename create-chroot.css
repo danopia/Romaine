@@ -4,7 +4,7 @@
    font-size: 200%;
    margin: 2em 5em;
 }
-#build-chroot core-icon {
+#build-chroot iron-icon {
   width: 32px;
   height: 32px;
 }
@@ -17,4 +17,8 @@ pre.shell {
 pre.shell:before {
   content: '$ ';
   color: #666;
+}
+
+h3 {
+  margin: 1em 25px;
 }

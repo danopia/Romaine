@@ -2,11 +2,11 @@
 <head>
   <title>Romaine</title>
 
-  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-  <link rel="import" href="bower_components/core-icons/core-icons.html">
-  <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
-  <link rel="import" href="bower_components/core-selector/core-selector.html">
+  <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="bower_components/iron-selector/iron-selector.html">
   <link rel="import" href="bower_components/font-roboto/roboto.html">
   <link rel="import" href="bower_components/paper-button/paper-button.html">
   <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
@@ -15,6 +15,7 @@
   <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
   <link rel="import" href="bower_components/paper-toast/paper-toast.html">
   <link rel="import" href="bower_components/paper-item/paper-item.html">
+  <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
 
   <link rel="import" href="elements/chroot-info.html">
   <link rel="import" href="elements/dynamic-list.html">
@@ -22,17 +23,17 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body unresolved>
-  <core-toolbar class="draggable">
+<body>
+  <paper-toolbar class="draggable">
     <paper-icon-button icon="menu"></paper-icon-button>
     <span flex>Romaine</span>
     <paper-icon-button icon="close"></paper-icon-button>
     <paper-fab icon="add"></paper-fab>
-  </core-toolbar>
+  </paper-toolbar>
 
-  <div horizontal layout>
-    <dynamic-list flex showChecks="false"></dynamic-list>
-    <chroot-info flex three></chroot-info>
+  <div class="horizontal layout">
+    <dynamic-list class="flex-1" no-icons></dynamic-list>
+    <chroot-info class="flex-3"></chroot-info>
   </div>
 
   <paper-toast id="connected-toast" text="Connected to Romaine server"></paper-toast>

@@ -27,14 +27,15 @@ chrome.runtime.sendMessage({cmd: 'list chroots'}, function (response) {
   });
 });
 
-document.querySelector('dynamic-list').onselect = function (e, item, selector) {
-  if (!selector.selected) return;
+document.querySelector('dynamic-list').onselect = function (e, item) {
+  //console.log(item);
+  //if (!item.selected) return;
   
-  var chroot = chroots[selector.selected];
+  var chroot = chroots[this.selected];
   document.querySelector('chroot-info').selectChroot(chroot);
   
   if (chroot.state == 'stopped') {
-    chrome.runtime.sendMessage({cmd: 'start chroot', chroot: selector.selected}, function (leaf) {
+    chrome.runtime.sendMessage({cmd: 'start chroot', chroot: item.selected}, function (leaf) {
       chroot.state = 'running';
       //document.querySelector('chroot-info').chroot.port = leaf.port;
     });
