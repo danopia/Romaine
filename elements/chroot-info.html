@@ -4,8 +4,9 @@
   <template>
     <span>{{chroot.key}}</span> port <span>{{chroot.port}}</span>
     
-    <paper-button on-click="getVersion">
-      Get version info
+    
+    <paper-button style="float: right;" id="update" raised on-click="checkForUpdates">
+      Check for updates
     </paper-button>
     
     <dl>

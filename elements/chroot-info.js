@@ -25,14 +25,21 @@ Polymer({
       });
     };
     
-    this.checkForUpdate = function () {
+    this.checkForUpdates = function () {
       this.runCommand([
         'croutonversion',
         '-u'
       ], function (output) {
         var current = output.match(/crouton: version (.+)/)[1];
         var latest = output.match(/latest: version (.+)/)[1];
-        this.update = current == latest && latest;
+
+        if (current == latest) {
+          this.$.update.$$('paper-material').innerText = 'Up to date';
+          this.$.update.disabled = true;
+        } else {
+          this.$.update.$$('paper-material').innerText = 'Update available';
+          this.$.update.style.backgroundColor = '#c5e1a5';
+        }
       });
     };
     
