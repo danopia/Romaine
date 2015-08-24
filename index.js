@@ -23,15 +23,16 @@ addEventListener('message', function (evt) {
   
   if (evt.data.event == 'add chroot') {
     chrootList.push('items', evt.data.chroot);
+    chrootArray.push(evt.data.chroot);
+    chroots[evt.data.chroot.key] = evt.data.chroot;
     
     chrome.runtime.sendMessage({
       cmd: 'build chroot',
       args: evt.data.command.split(' '),
       extras: {
-        stdin: 'user\npass123\npass123\n',
+        stdin: 'user\n',
       },
     }, function (response) {
-      console.log(response.output);
       changeState(evt.data.chroot.key, 'stopped');
     });
   }
