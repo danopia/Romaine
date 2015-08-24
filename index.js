@@ -5,6 +5,10 @@ var chrootInfo = document.querySelector('chroot-info');
 
 closeButton.onclick = function () { window.close(); };
 
+
+////////////////////
+// Chroot Creation
+
 newButton.onclick = function () {
   chrome.app.window.create('create-chroot.html', {
     id: 'createChroot',
@@ -12,6 +16,22 @@ newButton.onclick = function () {
     bounds: {width: 700, height: 600}
   });
 };
+
+addEventListener('message', function (evt) {
+  if (evt.origin != 'chrome-extension://illiapbpjpagcchpdmdaonjpfpphgjhb') return;
+  console.log('Got message:', evt.data);
+  
+  if (evt.data.event == 'add chroot') {
+    chrootList.push('items', evt.data.chroot);
+    
+    chrome.runtime.sendMessage({cmd: 'run crouton', args: evt.data.command.split(' ')}, function (response) {
+      console.log(response.output);
+      changeState(evt.data.chroot.key, 'stopped');
+    });
+  }
+});
+
+////////////////////
 
 var chroots = {};
 var chrootArray = [];

@@ -2,12 +2,11 @@
 
 <dom-module id="chroot-info">
   <template>
-    <span>{{chroot.key}}</span> port <span>{{chroot.port}}</span>
-    
-    
-    <paper-button style="float: right;" id="update" raised on-click="checkForUpdates">
+    <paper-button id="update" raised on-click="checkForUpdates">
       Check for updates
     </paper-button>
+    
+    <h2>{{chroot.key}}</h2>
     
     <dl>
       <dt>crouton</dt><dd>{{versions.crouton}}</dd>
@@ -20,5 +19,15 @@
       <dt>freon</dt><dd>{{versions.freon}}</dd>
     </dl>
   </template>
+  <style>
+    :host {
+      padding: 15px;
+    }
+    
+    #update {
+      float: right;
+      background-color: #81d4fa; /* light blue l3 */
+    }
+  </style>
   <script src="chroot-info.js"></script>
 </dom-module>

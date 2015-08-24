@@ -38,7 +38,7 @@ Polymer({
           this.$.update.disabled = true;
         } else {
           this.$.update.$$('paper-material').innerText = 'Update available';
-          this.$.update.style.backgroundColor = '#c5e1a5';
+          this.$.update.style.backgroundColor = '#c5e1a5'; // light green l3
         }
       });
     };

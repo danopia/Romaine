@@ -1,4 +1,5 @@
-<!DOCTYPE html><html><head>
+<!DOCTYPE html>
+<head>
   <title>Build New Chroot</title>
 
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -28,39 +29,15 @@
 
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="create-chroot.css">
-  <style is="custom-style">
-    /* TODO(polyup): For speed, consider reworking these styles with .classes
-                     and #ids rather than [attributes].
-    */
-    [layout] {
-      @apply(--layout);
-    }
-    [layout][vertical] {
-      @apply(--layout-vertical);
-    }
-    [fullbleed] {
-      margin: 0;
-      height:100vh;
-    }
-    [layout][horizontal] {
-      @apply(--layout-horizontal);
-    }
-    [layout][center] {
-      @apply(--layout-center);
-    }
-    [self-center] {
-      @apply(--layout-self-center);
-    }
-  </style>
 </head>
 
-<body fullbleed layout vertical>
+<body class="fullbleed layout vertical">
   <paper-toolbar class="draggable">
     <span flex>Build New Chroot</span>
     <paper-icon-button icon="close"></paper-icon-button>
   </paper-toolbar>
 
-  <paper-header-panel mode="waterfall" flex="">
+  <paper-header-panel mode="waterfall" flex>
     <paper-tabs class="core-header animate" selected="0" valueattr="key">
       <paper-tab key="distro">Distribution</paper-tab>
       <paper-tab key="release">Release</paper-tab>
@@ -70,7 +47,8 @@
     </paper-tabs>
 
     <div class="content">
-      <neon-animated-pages selected="0" valueattr="key" entry-animation="slide-from-right-animation" exit-animation="slide-left-animation" flex="">
+      <neon-animated-pages selected="0" valueattr="key"
+          entry-animation="slide-from-right-animation" exit-animation="slide-left-animation">
         <neon-animatable key="distro">
           <h3>Select a Linux distribution to use</h3>
           <dynamic-list id="distros"></dynamic-list>
@@ -90,7 +68,7 @@
           <h3>Extra settings for the chroot setup</h3>
 
           <core-label class="horizontal layout">
-            <paper-checkbox for="" id="encrypt"></paper-checkbox>
+            <paper-checkbox id="encrypt"></paper-checkbox>
             <div class="vertical layout">
               <h2>Encrypt</h2>
               <div>Require a password to unlock the chroot whenever you want to use it.</div>
@@ -98,7 +76,7 @@
           </core-label>
 
           <core-label class="horizontal layout">
-            <paper-checkbox for="" id="update"></paper-checkbox>
+            <paper-checkbox id="update"></paper-checkbox>
             <div class="vertical layout">
               <h2>Update</h2>
               <div>Update the existing chroot of this release, if any. Allows for adding targets.</div>
@@ -115,18 +93,13 @@
             </paper-button>
           </div>
         </neon-animatable>
-
-        <neon-animatable key="building" class="vertical layout">
-          <paper-progress indeterminate="" style="width: auto; margin: 2em;"></paper-progress>
-          <p class="self-center">building... this might take a while!</p>
-        </neon-animatable>
       </neon-animated-pages>
     </div>
   </paper-header-panel>
 
   <iron-collapse id="step-bar">
     <paper-toolbar style="background-color: #cfd8dc; color: #263238;">
-      <span flex=""></span>
+      <span flex></span>
       <paper-button id="next-step" tabindex="0">
         next step &nbsp;
         <iron-icon icon="arrow-forward"></iron-icon>
@@ -136,14 +109,10 @@
 
   <iron-collapse id="shell">
     <paper-toolbar style="background-color: #222; color: #ccc;">
-      <pre flex="" class="shell">sudo sh ~/Downloads/crouton <span id="cmd-line"></span></pre>
+      <pre flex class="shell">sudo sh ~/Downloads/crouton <span id="cmd-line"></span></pre>
     </paper-toolbar>
-  </iron-collapse>
-
-  <iron-collapse id="output" style="background-color: #333; color: #ccc; height: 300px;" fixedsize="">
-    <pre id="actual-output" style="margin: 1em 2em;">...</pre>
   </iron-collapse>
 
   <script src="common.js"></script>
   <script src="create-chroot.js"></script>
-</body></html>
+</body>

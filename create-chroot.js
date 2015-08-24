@@ -105,16 +105,19 @@ for (i = 0; i < boxes.length; i++) {
 
 // Run crouton
 var buildButton = document.querySelector('#build-chroot');
-var output = document.querySelector('#output');
 buildButton.addEventListener('click', function () {
-  pages.selected = 5; // building
   buildCommand();
-
-  setTimeout(function () {
-    output.opened = true;
-  }, 750);
-
-  chrome.runtime.sendMessage({cmd: 'run crouton', args: cmdLine.innerText.split(' ')}, function (response) {
-    document.querySelector('#output pre').innerText = response.output;
-  });
+  
+  // TODO: main window might not be open
+  chrome.app.window.get('mainWindow').contentWindow.postMessage({
+    event: 'add chroot',
+    command: cmdLine.innerText,
+    chroot: {
+      key: releases.selected,
+      label: releases.selected,
+      state: 'building',
+      description: '(building...)',
+    },
+  }, 'chrome-extension://illiapbpjpagcchpdmdaonjpfpphgjhb');
+  window.close();
 });
