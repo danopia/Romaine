@@ -47,5 +47,15 @@ Polymer({
       this.chroot = chroot;
       this.getVersions();
     };
+    
+    this.execCommand = function (event) {
+      event.preventDefault();
+      var cmd = this.$.command.value;
+      var outputBox = this.$.output;
+      
+      this.runCommand(cmd.split(' '), function (output) {
+        outputBox.innerText = output;
+      });
+    };
   }
 });

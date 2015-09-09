@@ -19,7 +19,14 @@
     
     <paper-card heading="Run Command">
       <div class="card-content">
-        <paper-input label="Full command"></paper-input>
+        <form class="submittable" on-submit="execCommand">
+          <paper-input id="command" label="Full command"></paper-input>
+          <paper-button raised on-click="execCommand">
+            Execute
+          </paper-button>
+        </form>
+        
+        <pre id="output"></pre>
       </div>
     </paper-card>
 
@@ -33,8 +40,26 @@
     }
     
     paper-card {
-      min-width: 70%;
+      min-width: 75%;
+      max-width: 90%;
       margin-bottom: 16px;
+    }
+    
+    .submittable {
+      display: flex;
+      align-items: center;
+    }
+    .submittable paper-input {
+      flex: 1;
+    }
+    
+    [raised] {
+      background-color: #dcedc8; /* light-green lighten-4 */
+    }
+    
+    pre {
+      max-height: 400px;
+      overflow: auto;
     }
   </style>
   <script src="chroot-info.js"></script>
