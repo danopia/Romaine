@@ -1,3 +1,7 @@
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: RobotoDraft, sans-serif;
   color: #333;
@@ -20,11 +24,15 @@ a, a:hover {
 
 paper-toolbar.draggable {
   -webkit-app-region: drag;
-  background-color: #455ede;
+  background-color: #689f38; /* light-green darken-2 */
   box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
   color: #fff;
   font-size: 20px;
   font-weight: 400;
+}
+
+paper-toolbar.draggable span {
+  color: #dcedc8; /* light-green lighten-4 */
 }
 
 paper-toolbar paper-icon-button, core-toolbar paper-tabs {
@@ -44,8 +52,7 @@ paper-fab {
 }
 
 paper-tabs {
-  /* background-color: #5677fc; */
-  background-color: #455ede;
+  background-color: #689f38; /* light-green darken-2 */
   color: #fff;
 }
 
@@ -58,6 +65,32 @@ paper-tabs[noink][nobar] paper-tab.core-selected {
 }
 
 iron-selector .iron-selected {
-  background: #eee;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+  background-color: #9ccc65; /* light-green lighten-1 */
+}
+
+.split > * {
+  overflow: auto;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: #cfd8dc;
+}
+
+.horizontal.split {
+  flex: 1;
+}
+
+.paper-card.title-text {
+  padding-bottom: 0 !important;
+}
+
+.paper-card .card-content {
+  padding-top: 0 !important;
 }
 

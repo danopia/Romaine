@@ -2,26 +2,39 @@
 
 <dom-module id="chroot-info">
   <template>
-    <paper-button id="update" raised on-click="checkForUpdates">
-      Check for updates
-    </paper-button>
+    <paper-card heading="Chroot Versioning">
+      <div class="card-content">
+        <dl>
+          <dt>release</dt><dd>{{versions.release}}</dd>
+          <dt>xmethod</dt><dd>{{versions.xmethod}}</dd>
+          <dt>targets</dt><dd>{{versions.targets}}</dd>
+        </dl>
+      </div>
+      <div class="card-actions">
+        <paper-button id="update" on-click="checkForUpdates">
+          Check for updates
+        </paper-button>
+      </div>
+    </paper-card>
     
-    <h2>{{chroot.key}}</h2>
-    
-    <dl>
-      <dt>release</dt><dd>{{versions.release}}</dd>
-      <dt>xmethod</dt><dd>{{versions.xmethod}}</dd>
-      <dt>targets</dt><dd>{{versions.targets}}</dd>
-    </dl>
+    <paper-card heading="Run Command">
+      <div class="card-content">
+        <paper-input label="Full command"></paper-input>
+      </div>
+    </paper-card>
+
   </template>
   <style>
     :host {
       padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     
-    #update {
-      float: right;
-      background-color: #81d4fa; /* light blue l3 */
+    paper-card {
+      min-width: 70%;
+      margin-bottom: 16px;
     }
   </style>
   <script src="chroot-info.js"></script>
